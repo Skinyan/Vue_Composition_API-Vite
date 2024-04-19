@@ -1,22 +1,20 @@
 <template>
   <p>
-    <strong>{{ name }}</strong>
-    {{ price }}
+    <strong>{{ name }}:</strong>
+    <YummyMealPrice :price="price" />
     <button @click="addToCart">Add to Cart</button>
   </p>
 </template>
 
-<script>
-export default {
-  props: {
-    name: String,
-    price: Number,
-  },
-  setup(props, { emit }) {
-    const addToCart = () => emit("addToCart", props.name);
-    return { addToCart };
-  },
-};
-</script>
+<script setup>
+import { defineProps, defineEmits } from "vue";
+const props = defineProps({
+  name: String,
+  price: Number,
+});
 
-<style lang="scss" scoped></style>
+const emit = defineEmits(["addToCart"]);
+
+import YummyMealPrice from "./>YummyMealPrice.vue";
+const addToCart = () => emit("addToCart", props.name);
+</script>
